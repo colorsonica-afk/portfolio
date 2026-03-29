@@ -963,7 +963,7 @@ function renderGrid() {
     card.className = 'app-card fade-in';
 
     const screenHTML = app.img
-      ? `<img src="${app.img}" alt="${app.name}" loading="lazy">`
+      ? `<img src="${app.img}" alt="${app.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-screen-placeholder\\'><div class=\\'card-screen-icon\\'>${app.icon}</div><div class=\\'card-screen-text\\'>${app.areaLabel}</div></div>'">`
       : `<div class="card-screen-placeholder"><div class="card-screen-icon">${app.icon}</div><div class="card-screen-text">${app.areaLabel}</div></div>`;
 
     const linkHTML = app.link
@@ -989,8 +989,12 @@ function renderGrid() {
       </div>
     `;
     grid.appendChild(card);
-    setTimeout(() => card.classList.add('visible'), 50);
+    setTimeout(() => card.classList.add('visible'), 50 + (Array.from(grid.children).length * 60));
   });
+  // Force all cards visible after render in case observer misses them
+  setTimeout(() => {
+    grid.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+  }, 800);
 }
 
 // Intersection observer for fade-ins
@@ -1002,4 +1006,14 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelect
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Fallback: force everything visible after 1s
+setTimeout(() => {
+  document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+}, 1000);
+
+renderGrid();
+</script>
+</body>
+</html>
