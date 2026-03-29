@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Guevara · Soluciones Digitales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@200;300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a1f;
+    --dark2: #22222a;
+    --dark3: #2c2c36;
+    --red: #e03030;
+    --red-dim: #c02020;
+    --aqua: #3ecfb8;
+    --aqua-dim: #2aab97;
+    --text: #e8e8ec;
+    --muted: #8888a0;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,26,31,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--aqua);
+    letter-spacing: 1px;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--aqua); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(62,207,184,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(224,48,48,0.06) 0%, transparent 60%);
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--aqua);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--aqua);
+  }
+
+  h1 {
+    font-size: clamp(56px, 8vw, 96px);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .h1-first {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    letter-spacing: 8px;
+    color: var(--text);
+    display: block;
+  }
+  .h1-last {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-style: italic;
+    color: var(--aqua);
+    display: block;
+    letter-spacing: 2px;
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+  .hero-tagline strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    padding: 14px 32px;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--red-dim); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--aqua);
+    padding: 13px 32px;
+    border: 1px solid var(--aqua);
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { background: rgba(62,207,184,0.08); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  section { padding: 6rem 2.5rem; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--aqua);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--aqua); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── SOBRE MÍ ─── */
+  #sobre { background: var(--dark2); }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .sobre-text p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+  .sobre-text p strong { color: var(--text); font-weight: 500; }
+  .sobre-text p em { color: var(--aqua); font-style: normal; }
+
+  .sobre-pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 1.5rem;
+  }
+  .pill {
+    background: rgba(62,207,184,0.08);
+    border: 1px solid rgba(62,207,184,0.25);
+    color: var(--aqua);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 5px 14px;
+    text-transform: uppercase;
+  }
+
+  .sobre-visual {
+    position: relative;
+  }
+  .sobre-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+  .sobre-card-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--aqua);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .prob-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prob-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .prob-icon {
+    width: 32px; height: 32px;
+    background: rgba(224,48,48,0.12);
+    border: 1px solid rgba(224,48,48,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .prob-label { font-size: 13px; color: var(--text); font-weight: 500; }
+  .prob-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .sol-arrow {
+    font-size: 18px;
+    color: var(--aqua);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .sol-label { font-size: 12px; color: var(--aqua); font-weight: 500; }
+
+  /* ─── PORTAFOLIO ─── */
+  #portafolio { background: var(--dark); }
+  .port-inner { max-width: 1200px; margin: 0 auto; }
+
+  .port-filter {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .pf-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pf-btn:hover, .pf-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  .port-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+  }
+
+  .app-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .app-card:hover {
+    border-color: var(--aqua);
+    transform: translateY(-4px);
+    z-index: 1;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .card-screen {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    background: var(--dark3);
+  }
+  .card-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+  .app-card:hover .card-screen img {
+    transform: scale(1.04);
+  }
+  .card-screen-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .card-screen-icon {
+    font-size: 36px;
+    opacity: 0.4;
+  }
+  .card-screen-text {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card-accent {
+    height: 3px;
+    background: var(--red);
+    transition: background 0.2s;
+  }
+  .app-card:hover .card-accent { background: var(--aqua); }
+
+  .card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .card-area {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .card-built-badge {
+    background: rgba(62,207,184,0.1);
+    border: 1px solid rgba(62,207,184,0.3);
+    color: var(--aqua);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .card-problem {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    flex: 1;
+  }
+  .card-solution {
+    font-size: 12px;
+    color: var(--aqua);
+    font-weight: 500;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .card-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 11px;
+    color: var(--red);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .card-link:hover { color: var(--aqua); }
+
+  /* ─── PROCESO ─── */
+  #proceso { background: var(--dark2); }
+  .proceso-inner { max-width: 900px; margin: 0 auto; }
+  .proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 3rem;
+  }
+  .paso {
+    background: var(--dark3);
+    padding: 2rem 1.5rem;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+  .paso-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(224,48,48,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .paso-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .paso-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .paso-icon {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 20px;
+    opacity: 0.5;
+  }
+
+  /* ─── CONTACTO ─── */
+  #contacto { background: var(--dark); }
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-inner .section-label { justify-content: center; }
+  .contact-inner .section-label::before { display: none; }
+  .contact-subtitle {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  .contact-channels {
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .contact-channel {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    text-align: left;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+    min-width: 180px;
+  }
+  .contact-channel:hover {
+    border-color: var(--aqua);
+    transform: translateY(-3px);
+  }
+  .ch-icon { font-size: 22px; margin-bottom: 0.5rem; display: block; }
+  .ch-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .ch-value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark2);
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-brand {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+  .footer-brand span {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--aqua);
+  }
+  .footer-note {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer-dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .proceso-steps { grid-template-columns: 1fr 1fr; }
+    .port-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 52px; }
+    .hero-stats { gap: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .proceso-steps { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">daniel <span>Guevara</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre mí</a></li>
+    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-in">Soluciones Digitales · Colombia</div>
+    <h1 class="fade-in" style="transition-delay:0.1s">
+      <span class="h1-first">Daniel</span>
+      <span class="h1-last">Guevara</span>
+    </h1>
+    <p class="hero-tagline fade-in" style="transition-delay:0.2s">
+      Diseño y construyo <strong>herramientas digitales a la medida</strong> de cada área y empresa.
+      <em style="color:var(--aqua)">Tu empresa tiene procesos únicos. Tus herramientas también deberían serlo.</em>
+    </p>
+    <div class="hero-ctas fade-in" style="transition-delay:0.3s">
+      <a href="#portafolio" class="btn-primary">Ver portafolio</a>
+      <a href="#contacto" class="btn-ghost">Hablemos</a>
+    </div>
+    <div class="hero-stats fade-in" style="transition-delay:0.4s">
+      <div>
+        <div class="hero-stat-num">15</div>
+        <div class="hero-stat-label">soluciones desarrolladas</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">8</div>
+        <div class="hero-stat-label">apps en producción</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">áreas cubiertas</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">914</div>
+        <div class="hero-stat-label">correos en un solo envío</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-text fade-in">
+      <div class="section-label">Quién soy</div>
+      <h2 class="section-title">No solo desarrollo.<br>Resuelvo problemas.</h2>
+      <p>Soy Daniel Guevara, desarrollador de <strong>herramientas internas y automatización de procesos</strong> para PyMEs colombianas. Combino formación técnica con años de trabajo autodidacta construyendo sistemas reales para empresas reales.</p>
+      <p>Trabajo en <em>Ital Lent</em>, donde construí desde cero más de 8 aplicaciones que hoy usan diariamente equipos de ventas, logística, operaciones y marketing. No son prototipos: son sistemas vivos, con usuarios reales y problemas reales resueltos.</p>
+      <p>Mi diferencial es que <strong>entiendo el negocio antes de escribir código</strong>. Cada solución nace de un proceso que no funcionaba bien.</p>
+      <div class="sobre-pills">
+        <span class="pill">PHP · MySQL</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">AppSheet</span>
+        <span class="pill">Google Sheets</span>
+        <span class="pill">HTML · CSS</span>
+        <span class="pill">APIs REST</span>
+        <span class="pill">WordPress</span>
+        <span class="pill">Looker Studio</span>
+      </div>
+    </div>
+    <div class="sobre-visual fade-in" style="transition-delay:0.15s">
+      <div class="sobre-card">
+        <div class="sobre-card-title">// qué soluciono</div>
+        <div class="prob-row">
+          <div class="prob-icon">📋</div>
+          <div>
+            <div class="prob-label">Procesos en Excel o WhatsApp</div>
+            <div class="prob-desc">Registros manuales, datos dispersos, cero trazabilidad.</div>
+          </div>
+          <div class="sol-arrow">→</div>
+          <div>
+            <div class="sol-label">Sistema a la medida con historial y alertas</div>
+          </div>
+        </div>
+        <div class="prob-row">
+          <div class="prob-icon">🔍</div>
+          <div>
+            <div class="prob-label">Sin visibilidad del negocio</div>
+            <div class="prob-desc">No sabes qué vende más, quién entregó, qué está pendiente.</div>
+          </div>
+          <div class="sol-arrow">→</div>
+          <div>
+            <div class="sol-label">Dashboard gerencial en tiempo real</div>
+          </div>
+        </div>
+        <div class="prob-row">
+          <div class="prob-icon">⏰</div>
+          <div>
+            <div class="prob-label">Tareas repetitivas que quitan tiempo</div>
+            <div class="prob-desc">Consultar guías, enviar correos, cotizar, registrar.</div>
+          </div>
+          <div class="sol-arrow">→</div>
+          <div>
+            <div class="sol-label">Automatización con un clic</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="port-inner">
+    <div class="section-label fade-in">Portafolio real</div>
+    <h2 class="section-title fade-in">Apps construidas.<br>No promesas.</h2>
+
+    <div class="port-filter fade-in">
+      <button class="pf-btn active" onclick="filterCards('all', this)">Todas</button>
+      <button class="pf-btn" onclick="filterCards('ventas', this)">Ventas</button>
+      <button class="pf-btn" onclick="filterCards('logistica', this)">Logística</button>
+      <button class="pf-btn" onclick="filterCards('operaciones', this)">Operaciones</button>
+      <button class="pf-btn" onclick="filterCards('marketing', this)">Marketing</button>
+      <button class="pf-btn" onclick="filterCards('talento', this)">Talento</button>
+    </div>
+
+    <div class="port-grid" id="portGrid"></div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="proceso-inner">
+    <div class="section-label fade-in">Cómo trabajo</div>
+    <h2 class="section-title fade-in">Simple, directo,<br>sin vueltas.</h2>
+    <div class="proceso-steps fade-in">
+      <div class="paso">
+        <div class="paso-num">01</div>
+        <div class="paso-icon">🎯</div>
+        <div class="paso-title">Diagnóstico</div>
+        <div class="paso-desc">Entiendo tu proceso, el dolor real y qué resultado necesitas. Sin vender tecnología innecesaria.</div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">02</div>
+        <div class="paso-icon">📐</div>
+        <div class="paso-title">Propuesta</div>
+        <div class="paso-desc">Diseño la solución más simple que resuelva el problema. Te muestro un prototipo antes de desarrollar.</div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">03</div>
+        <div class="paso-icon">⚙️</div>
+        <div class="paso-title">Desarrollo</div>
+        <div class="paso-desc">Construyo la app a la medida de tu área y equipo. Con acceso para que veas el avance en vivo.</div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">04</div>
+        <div class="paso-icon">🚀</div>
+        <div class="paso-title">Soporte</div>
+        <div class="paso-desc">Te acompaño en el lanzamiento y ajustes post-entrega. El sistema crece con tu empresa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-inner">
+    <div class="section-label">Hablemos</div>
+    <h2 class="section-title">¿Tienes un proceso<br>que se puede mejorar?</h2>
+    <p class="contact-subtitle">Cuéntame el problema. Si tengo una solución para tu área, te lo digo directo. Si no, también.</p>
+    <div class="contact-channels">
+      <a href="https://wa.me/573192414610" class="contact-channel" target="_blank">
+        <span class="ch-icon">💬</span>
+        <span class="ch-label">WhatsApp</span>
+        <span class="ch-value">+57 319 241 4610</span>
+      </a>
+      <a href="mailto:colorsonica@gmail.com" class="contact-channel">
+        <span class="ch-icon">📧</span>
+        <span class="ch-label">Email</span>
+        <span class="ch-value">colorsonica@gmail.com</span>
+      </a>
+      <a href="https://talento.ital-lent.com" class="contact-channel" target="_blank">
+        <span class="ch-icon">🔗</span>
+        <span class="ch-label">Portal</span>
+        <span class="ch-value">talento.ital-lent.com</span>
+      </a>
+    </div>
+    <a href="https://wa.me/573192414610?text=Hola%20Daniel%2C%20vi%20tu%20portafolio%20y%20me%20interesa%20una%20soluci%C3%B3n%20digital%20para%20mi%20empresa." class="btn-primary" target="_blank" style="display:inline-flex;align-items:center;gap:10px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Iniciar conversación
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">daniel <span>Guevara</span> · Soluciones Digitales</div>
+  <div class="footer-note">
+    <span class="footer-dot"></span>Disponible para proyectos · Colombia 2026
+  </div>
+</footer>
+
+<script>
+const apps = [
+  {
+    area: 'ventas', areaLabel: 'Ventas',
+    name: 'Central de Llamadas',
+    built: true,
+    problem: 'El equipo comercial llama sin orden, sin historial y sin seguimiento.',
+    solution: 'CRM ligero: 9.532 contactos, historial de llamadas, estados y asignación por consultora.',
+    link: 'https://talento.ital-lent.com/LLAMADAS/',
+    img: 'cap-llamadas.png',
+    icon: '📞'
+  },
+  {
+    area: 'logistica', areaLabel: 'Logística',
+    name: 'Rastreo de Guías',
+    built: true,
+    problem: 'El equipo consultaba cada guía manualmente en las páginas de transportadoras.',
+    solution: 'Carga masiva desde Excel, rastreo automático en Interrapidísimo e Interservice, alertas de retraso.',
+    link: 'https://api.ital-lent.com/guiasenvios/',
+    img: 'cap-guias.png',
+    icon: '🚚'
+  },
+  {
+    area: 'marketing', areaLabel: 'Marketing',
+    name: 'Mailer Masivo',
+    built: true,
+    problem: 'Enviar correos a clientes era manual, lento y dependía de plataformas costosas.',
+    solution: '914 correos enviados en una campaña. Carga por Excel, plantilla HTML y métricas en vivo.',
+    link: 'https://ital-lent.com/ycloud-mailer/',
+    img: 'cap-mailer.png',
+    icon: '📧'
+  },
+  {
+    area: 'operaciones', areaLabel: 'Operaciones',
+    name: 'Banco de Lentes',
+    built: true,
+    problem: 'El inventario de lentes vivía en Excel sin trazabilidad de movimientos.',
+    solution: 'Sistema de préstamos, estados por ítem, flujo de trabajo y actividad reciente en tiempo real.',
+    link: 'https://talento.ital-lent.com/banco-lentes/',
+    img: 'cap-banco-lentes.png',
+    icon: '📦'
+  },
+  {
+    area: 'talento', areaLabel: 'Talento',
+    name: 'Portal del Empleado',
+    built: true,
+    problem: 'Las herramientas de la empresa estaban dispersas en chats, correos y bookmarks.',
+    solution: 'Intranet unificada con acceso a todos los aplicativos, por área y por rol.',
+    link: 'https://talento.ital-lent.com/',
+    img: 'cap-portal.png',
+    icon: '🏠'
+  },
+  {
+    area: 'talento', areaLabel: 'Inteligencia',
+    name: 'Centro de Inteligencia',
+    built: true,
+    problem: 'Los reportes gerenciales se armaban manualmente cada mes con datos de varias fuentes.',
+    solution: 'Panel consolidado: $642M ventas enero 2026, comparativos mensuales, segmentación y exportables.',
+    link: 'https://talento.ital-lent.com/data/',
+    img: 'cap-data.png',
+    icon: '📊'
+  },
+  {
+    area: 'operaciones', areaLabel: 'Operaciones',
+    name: 'POS Personalizado — Café',
+    built: true,
+    problem: 'Un café necesitaba un sistema de pedidos propio, sin pagar por licencias genéricas.',
+    solution: 'POS a medida: pedidos por mesa, barra o llevar, dashboard de ventas y control de productos.',
+    link: null,
+    img: 'cap-pos2.png',
+    icon: '☕'
+  },
+  {
+    area: 'marketing', areaLabel: 'Digital',
+    name: 'App de Barrio — Soy del Parche',
+    built: true,
+    problem: 'Un barrio no tenía forma de conectar a sus comercios, eventos y vecinos en un solo lugar.',
+    solution: 'App hiperlocal con cupones, muro comunitario, tiendas, actividades y sistema de regalos.',
+    link: null,
+    img: 'cap-barrio.png',
+    icon: '🏘️'
+  },
+  {
+    area: 'marketing', areaLabel: 'Marketing',
+    name: 'Calculadoras de Producto',
+    built: true,
+    problem: 'Los vendedores y clientes no calculaban rápido precios, equivalencias y combinaciones.',
+    solution: 'Herramientas interactivas embebibles en web o intranet, personalizadas por categoría.',
+    link: 'https://ital-lent.com/wp-content/uploads/2025/calculadoras/CALCULADORAS.HTML',
+    img: null,
+    icon: '🧮'
+  },
+  {
+    area: 'ventas', areaLabel: 'Ventas',
+    name: 'Pipeline de Oportunidades',
+    built: false,
+    problem: 'No hay visibilidad sobre en qué etapa está cada cliente potencial.',
+    solution: 'Tablero visual de embudo de ventas, alertas de seguimiento y reportes por vendedor.',
+    link: null,
+    img: null,
+    icon: '📊'
+  },
+  {
+    area: 'ventas', areaLabel: 'Ventas',
+    name: 'Cotizador Inteligente',
+    built: false,
+    problem: 'Hacer una cotización toma tiempo y queda perdida en WhatsApp.',
+    solution: 'Generador de PDF con precios, descuentos configurables y envío directo al cliente.',
+    link: null,
+    img: null,
+    icon: '📄'
+  },
+  {
+    area: 'logistica', areaLabel: 'Logística',
+    name: 'Control de Devoluciones',
+    built: false,
+    problem: 'Las devoluciones se pierden o quedan sin procesar por semanas.',
+    solution: 'Registro, estado del proceso y trazabilidad hasta el reingreso al inventario.',
+    link: null,
+    img: null,
+    icon: '↩️'
+  },
+];
+
+let activeFilter = 'all';
+
+function filterCards(area, btn) {
+  activeFilter = area;
+  document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('portGrid');
+  grid.innerHTML = '';
+  const visible = activeFilter === 'all' ? apps : apps.filter(a => a.area === activeFilter);
+  visible.forEach(app => {
+    const card = document.createElement('div');
+    card.className = 'app-card fade-in';
+
+    const screenHTML = app.img
+      ? `<img src="${app.img}" alt="${app.name}" loading="lazy">`
+      : `<div class="card-screen-placeholder"><div class="card-screen-icon">${app.icon}</div><div class="card-screen-text">${app.areaLabel}</div></div>`;
+
+    const linkHTML = app.link
+      ? `<a href="${app.link}" class="card-link" target="_blank" onclick="event.stopPropagation()">Ver app en vivo →</a>`
+      : '';
+
+    const builtHTML = app.built
+      ? `<span class="card-built-badge">✓ En producción</span>`
+      : `<span style="font-size:9px;color:var(--muted);border:1px solid var(--border);padding:2px 8px;">Próximamente</span>`;
+
+    card.innerHTML = `
+      <div class="card-screen">${screenHTML}</div>
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-area">${app.areaLabel}</span>
+          ${builtHTML}
+        </div>
+        <div class="card-name">${app.name}</div>
+        <div class="card-problem">${app.problem}</div>
+        <div class="card-solution">→ ${app.solution}</div>
+        ${linkHTML}
+      </div>
+    `;
+    grid.appendChild(card);
+    setTimeout(() => card.classList.add('visible'), 50);
+  });
+}
+
+// Intersection observer for fade-ins
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Initial render
+renderGrid();
+
+// Re-observe after render
+setTimeout(() => {
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}, 100);
+</script>
+</body>
+</html>
