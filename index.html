@@ -589,15 +589,7 @@
   }
 
   /* ─── ANIMATIONS ─── */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .fade-in { opacity: 1; transform: none; }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
@@ -635,7 +627,7 @@
   <div class="hero-grid-lines"></div>
   <div class="hero-content">
     <div class="hero-eyebrow fade-in">Soluciones Digitales · Colombia</div>
-    <h1 class="fade-in" style="transition-delay:0.1s">
+    <h1 class="" style="transition-delay:0.1s">
       <span class="h1-first">Daniel</span>
       <span class="h1-last">Guevara</span>
     </h1>
@@ -991,22 +983,10 @@ function renderGrid() {
     grid.appendChild(card);
     setTimeout(() => card.classList.add('visible'), 50 + (Array.from(grid.children).length * 60));
   });
-  // Force all cards visible after render in case observer misses them
-  setTimeout(() => {
-    grid.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
-  }, 800);
 }
 
-// Intersection observer for fade-ins
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// Fallback: force everything visible after 1s
-s
+renderGrid();
+setTimeout(() => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')), 100);
+</script>
+</body>
+</html>
