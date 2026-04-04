@@ -349,21 +349,10 @@
 
   .card-screen {
     width: 100%;
-    height: 200px;
+    height: 160px;
     overflow: hidden;
     position: relative;
     background: var(--dark3);
-  }
-  .card-screen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    transition: transform 0.4s ease;
-    display: block;
-  }
-  .app-card:hover .card-screen img {
-    transform: scale(1.04);
   }
   .card-screen-placeholder {
     width: 100%;
@@ -372,17 +361,31 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
+    background: var(--dark3);
+    position: relative;
+  }
+  .card-screen-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
   }
   .card-screen-icon {
-    font-size: 36px;
-    opacity: 0.4;
+    font-size: 40px;
+    opacity: 0.7;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
   }
   .card-screen-text {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    position: relative;
+    z-index: 1;
   }
 
   .card-accent {
@@ -638,7 +641,7 @@
     </p>
     <div class="hero-ctas fade-in" style="transition-delay:0.3s">
       <a href="#portafolio" class="btn-primary">Ver portafolio</a>
-      <a href="caso-banco-lentes.html" class="btn-ghost">Casos de estudio</a>
+      <a href="#casos" class="btn-ghost">Casos de estudio</a>
       <a href="galeria.html" class="btn-ghost">Galería</a>
     </div>
     <div class="hero-stats fade-in" style="transition-delay:0.4s">
@@ -874,126 +877,54 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const apps = [
-  {
-    area: 'ventas', areaLabel: 'Ventas',
-    name: 'Central de Llamadas',
-    built: true,
-    problem: 'El equipo comercial llama sin orden, sin historial y sin seguimiento.',
-    solution: 'CRM ligero: 9.532 contactos, historial de llamadas, estados y asignación por consultora.',
-    link: 'https://talento.ital-lent.com/LLAMADAS/',
-    img: 'cap-llamadas.png',
-    icon: '📞'
-  },
-  {
-    area: 'logistica', areaLabel: 'Logística',
-    name: 'Rastreo de Guías',
-    built: true,
-    problem: 'El equipo consultaba cada guía manualmente en las páginas de transportadoras.',
-    solution: 'Carga masiva desde Excel, rastreo automático en Interrapidísimo e Interservice, alertas de retraso.',
-    link: 'https://api.ital-lent.com/guiasenvios/',
-    img: 'cap-guias.png',
-    icon: '🚚'
-  },
-  {
-    area: 'marketing', areaLabel: 'Marketing',
-    name: 'Mailer Masivo',
-    built: true,
-    problem: 'Enviar correos a clientes era manual, lento y dependía de plataformas costosas.',
-    solution: '914 correos enviados en una campaña. Carga por Excel, plantilla HTML y métricas en vivo.',
-    link: 'https://ital-lent.com/ycloud-mailer/',
-    img: 'cap-mailer.png',
-    icon: '📧'
-  },
-  {
-    area: 'operaciones', areaLabel: 'Operaciones',
-    name: 'Banco de Lentes',
-    built: true,
-    problem: 'El inventario de lentes vivía en Excel sin trazabilidad de movimientos.',
-    solution: 'Sistema de préstamos, estados por ítem, flujo de trabajo y actividad reciente en tiempo real.',
-    link: 'https://talento.ital-lent.com/banco-lentes/',
-    img: 'cap-banco-lentes.png',
-    icon: '📦'
-  },
-  {
-    area: 'talento', areaLabel: 'Talento',
-    name: 'Portal del Empleado',
-    built: true,
-    problem: 'Las herramientas de la empresa estaban dispersas en chats, correos y bookmarks.',
-    solution: 'Intranet unificada con acceso a todos los aplicativos, por área y por rol.',
-    link: 'https://talento.ital-lent.com/',
-    img: 'cap-portal.png',
-    icon: '🏠'
-  },
-  {
-    area: 'talento', areaLabel: 'Inteligencia',
-    name: 'Centro de Inteligencia',
-    built: true,
-    problem: 'Los reportes gerenciales se armaban manualmente cada mes con datos de varias fuentes.',
-    solution: 'Panel consolidado: $642M ventas enero 2026, comparativos mensuales, segmentación y exportables.',
-    link: 'https://talento.ital-lent.com/data/',
-    img: 'cap-data.png',
-    icon: '📊'
-  },
-  {
-    area: 'operaciones', areaLabel: 'Operaciones',
-    name: 'POS Personalizado — Café',
-    built: true,
-    problem: 'Un café necesitaba un sistema de pedidos propio, sin pagar por licencias genéricas.',
-    solution: 'POS a medida: pedidos por mesa, barra o llevar, dashboard de ventas y control de productos.',
-    link: null,
-    img: 'cap-pos2.png',
-    icon: '☕'
-  },
-  {
-    area: 'marketing', areaLabel: 'Digital',
-    name: 'App de Barrio — Soy del Parche',
-    built: true,
-    problem: 'Un barrio no tenía forma de conectar a sus comercios, eventos y vecinos en un solo lugar.',
-    solution: 'App hiperlocal con cupones, muro comunitario, tiendas, actividades y sistema de regalos.',
-    link: null,
-    img: 'cap-barrio.png',
-    icon: '🏘️'
-  },
-  {
-    area: 'marketing', areaLabel: 'Marketing',
-    name: 'Calculadoras de Producto',
-    built: true,
-    problem: 'Los vendedores y clientes no calculaban rápido precios, equivalencias y combinaciones.',
-    solution: 'Herramientas interactivas embebibles en web o intranet, personalizadas por categoría.',
-    link: 'https://ital-lent.com/wp-content/uploads/2025/calculadoras/CALCULADORAS.HTML',
-    img: null,
-    icon: '🧮'
-  },
-  {
-    area: 'ventas', areaLabel: 'Ventas',
-    name: 'Pipeline de Oportunidades',
-    built: false,
-    problem: 'No hay visibilidad sobre en qué etapa está cada cliente potencial.',
-    solution: 'Tablero visual de embudo de ventas, alertas de seguimiento y reportes por vendedor.',
-    link: null,
-    img: null,
-    icon: '📊'
-  },
-  {
-    area: 'ventas', areaLabel: 'Ventas',
-    name: 'Cotizador Inteligente',
-    built: false,
-    problem: 'Hacer una cotización toma tiempo y queda perdida en WhatsApp.',
-    solution: 'Generador de PDF con precios, descuentos configurables y envío directo al cliente.',
-    link: null,
-    img: null,
-    icon: '📄'
-  },
-  {
-    area: 'logistica', areaLabel: 'Logística',
-    name: 'Control de Devoluciones',
-    built: false,
-    problem: 'Las devoluciones se pierden o quedan sin procesar por semanas.',
-    solution: 'Registro, estado del proceso y trazabilidad hasta el reingreso al inventario.',
-    link: null,
-    img: null,
-    icon: '↩️'
-  },
+  { area:'ventas', areaLabel:'Ventas', name:'Central de Llamadas', built:true,
+    problem:'El equipo comercial llama sin orden, sin historial y sin seguimiento.',
+    solution:'CRM ligero: 9.532 contactos, historial de llamadas, estados y asignación por consultora.',
+    link:'https://talento.ital-lent.com/LLAMADAS/', icon:'☎️' },
+  { area:'logistica', areaLabel:'Logística', name:'Rastreo de Guías', built:true,
+    problem:'El equipo consultaba cada guía manualmente en las páginas de transportadoras.',
+    solution:'Carga masiva desde Excel, rastreo automático Interrapidísimo e Interservice, alertas de retraso.',
+    link:'https://api.ital-lent.com/guiasenvios/', icon:'📦' },
+  { area:'marketing', areaLabel:'Marketing', name:'Mailer Masivo', built:true,
+    problem:'Enviar correos a clientes era manual, lento y dependía de plataformas costosas.',
+    solution:'914 correos en una campaña. Carga por Excel, plantilla HTML y métricas en vivo.',
+    link:'https://ital-lent.com/ycloud-mailer/', icon:'✉️' },
+  { area:'operaciones', areaLabel:'Operaciones', name:'Banco de Lentes', built:true,
+    problem:'El inventario de lentes vivía en Excel sin trazabilidad de movimientos.',
+    solution:'Sistema de préstamos, estados por ítem, flujo de trabajo y actividad reciente en tiempo real.',
+    link:'https://talento.ital-lent.com/banco-lentes/', icon:'👁️' },
+  { area:'talento', areaLabel:'Talento', name:'Portal del Empleado', built:true,
+    problem:'Las herramientas de la empresa estaban dispersas en chats, correos y bookmarks.',
+    solution:'Intranet unificada con acceso a todos los aplicativos, por área y por rol.',
+    link:'https://talento.ital-lent.com/', icon:'🏢' },
+  { area:'talento', areaLabel:'Inteligencia', name:'Centro de Inteligencia', built:true,
+    problem:'Los reportes gerenciales se armaban manualmente cada mes con datos de varias fuentes.',
+    solution:'Panel consolidado: $642M ventas enero 2026, comparativos mensuales y exportables.',
+    link:'https://talento.ital-lent.com/data/', icon:'📈' },
+  { area:'operaciones', areaLabel:'Operaciones', name:'POS Personalizado — Café', built:true,
+    problem:'Un café necesitaba un sistema de pedidos propio, sin pagar licencias genéricas.',
+    solution:'POS a medida: pedidos por mesa, barra o llevar, dashboard y control de productos.',
+    link:null, icon:'☕' },
+  { area:'marketing', areaLabel:'Digital', name:'App de Barrio — Soy del Parche', built:true,
+    problem:'Un barrio no tenía forma de conectar comercios, eventos y vecinos en un solo lugar.',
+    solution:'App hiperlocal con promos, muro comunitario, tiendas, actividades y sistema de regalos.',
+    link:null, icon:'🏘️' },
+  { area:'marketing', areaLabel:'Marketing', name:'Calculadoras de Producto', built:true,
+    problem:'Los vendedores y clientes no calculaban rápido precios, equivalencias y combinaciones.',
+    solution:'Herramientas interactivas embebibles en web o intranet, personalizadas por categoría.',
+    link:'https://ital-lent.com/wp-content/uploads/2025/calculadoras/CALCULADORAS.HTML', icon:'🧮' },
+  { area:'ventas', areaLabel:'Ventas', name:'Pipeline de Oportunidades', built:false,
+    problem:'No hay visibilidad sobre en qué etapa está cada cliente potencial.',
+    solution:'Tablero visual de embudo de ventas, alertas de seguimiento y reportes por vendedor.',
+    link:null, icon:'🎯' },
+  { area:'ventas', areaLabel:'Ventas', name:'Cotizador Inteligente', built:false,
+    problem:'Hacer una cotización toma tiempo y queda perdida en WhatsApp.',
+    solution:'Generador de PDF con precios, descuentos configurables y envío directo al cliente.',
+    link:null, icon:'🗒️' },
+  { area:'logistica', areaLabel:'Logística', name:'Control de Devoluciones', built:false,
+    problem:'Las devoluciones se pierden o quedan sin procesar por semanas.',
+    solution:'Registro, estado del proceso y trazabilidad hasta el reingreso al inventario.',
+    link:null, icon:'🔄' },
 ];
 
 let activeFilter = 'all';
@@ -1013,9 +944,7 @@ function renderGrid() {
     const card = document.createElement('div');
     card.className = 'app-card fade-in';
 
-    const screenHTML = app.img
-      ? `<img src="${app.img}" alt="${app.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-screen-placeholder\\'><div class=\\'card-screen-icon\\'>${app.icon}</div><div class=\\'card-screen-text\\'>${app.areaLabel}</div></div>'">`
-      : `<div class="card-screen-placeholder"><div class="card-screen-icon">${app.icon}</div><div class="card-screen-text">${app.areaLabel}</div></div>`;
+    const screenHTML = `<div class="card-screen-placeholder"><div class="card-screen-icon">${app.icon}</div><div class="card-screen-text">${app.areaLabel}</div></div>`;
 
     const linkHTML = app.link
       ? `<a href="${app.link}" class="card-link" target="_blank" onclick="event.stopPropagation()">Ver app en vivo →</a>`
