@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>(TU MARCA AQUÍ) · Soluciones Digitales</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Raleway:wght@200;300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --accent: #e03030;
+  --accent-dim: #c02020;
+  --aqua: #3ecfb8;
+  --aqua-dim: #2aab97;
+}
+
+/* ─── DARK THEME (default) ─── */
+[data-theme="dark"] {
+  --bg:     #1a1a1f;
+  --bg2:    #22222a;
+  --bg3:    #2c2c36;
+  --text:   #e8e8ec;
+  --muted:  #8888a0;
+  --border: rgba(255,255,255,0.08);
+  --nav-bg: rgba(26,26,31,0.92);
+  --card-bg:#22222a;
+  --code-bg:#0d0d10;
+  --shadow: rgba(0,0,0,0.5);
+  --grid-line: rgba(255,255,255,0.02);
+  --prob-icon-bg: rgba(224,48,48,0.12);
+  --prob-icon-border: rgba(224,48,48,0.2);
+}
+
+/* ─── LIGHT THEME ─── */
+[data-theme="light"] {
+  --bg:     #f4f4f6;
+  --bg2:    #ffffff;
+  --bg3:    #eaeaef;
+  --text:   #18181f;
+  --muted:  #6b6b80;
+  --border: rgba(0,0,0,0.08);
+  --nav-bg: rgba(244,244,246,0.95);
+  --card-bg:#ffffff;
+  --code-bg:#f0f0f5;
+  --shadow: rgba(0,0,0,0.1);
+  --grid-line: rgba(0,0,0,0.03);
+  --prob-icon-bg: rgba(224,48,48,0.07);
+  --prob-icon-border: rgba(224,48,48,0.15);
+}
+
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Raleway',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  transition:background 0.3s,color 0.3s;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--nav-bg);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  height:60px;
+  transition:background 0.3s,border-color 0.3s;
+}
+.nav-logo{
+  font-family:'Raleway',sans-serif;
+  font-weight:200;font-size:17px;
+  letter-spacing:3px;color:var(--text);
+  text-decoration:none;
+}
+.nav-logo span{
+  font-family:'Playfair Display',serif;
+  font-weight:700;font-style:italic;
+  color:var(--aqua);letter-spacing:1px;
+}
+.nav-right{display:flex;align-items:center;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:12px;font-weight:400;
+  letter-spacing:1.5px;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--aqua)}
+
+/* Toggle button */
+.theme-toggle{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  color:var(--muted);
+  width:38px;height:38px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  font-size:16px;
+  transition:all 0.2s;
+  flex-shrink:0;
+}
+.theme-toggle:hover{border-color:var(--aqua);color:var(--aqua)}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:100px 2.5rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(62,207,184,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(224,48,48,0.06) 0%, transparent 60%);
+}
+[data-theme="light"] .hero-bg{
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(62,207,184,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(224,48,48,0.04) 0%, transparent 60%);
+}
+.hero-grid-lines{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-content{position:relative;z-index:1;max-width:800px}
+
+.hero-eyebrow{
+  font-size:11px;font-weight:500;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--aqua);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--aqua)}
+
+/* EDITABLE BRAND PLACEHOLDER */
+.brand-placeholder{
+  display:inline-block;
+  background:repeating-linear-gradient(
+    -45deg,
+    rgba(62,207,184,0.06) 0px,
+    rgba(62,207,184,0.06) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  border:2px dashed rgba(62,207,184,0.4);
+  padding:2px 16px;
+  color:var(--aqua);
+  font-style:italic;
+  font-size:0.7em;
+  letter-spacing:2px;
+  vertical-align:middle;
+  cursor:pointer;
+  transition:background 0.2s;
+  position:relative;
+}
+.brand-placeholder::after{
+  content:'← reemplazar';
+  position:absolute;
+  left:calc(100% + 8px);
+  top:50%;transform:translateY(-50%);
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:1px;
+  white-space:nowrap;
+  font-style:normal;
+  font-family:'DM Mono',monospace;
+}
+
+h1{font-size:clamp(56px,8vw,96px);line-height:1;margin-bottom:0.5rem}
+.h1-first{font-family:'Raleway',sans-serif;font-weight:200;letter-spacing:8px;color:var(--text);display:block}
+.h1-last{font-family:'Playfair Display',serif;font-weight:900;font-style:italic;color:var(--aqua);display:block;letter-spacing:2px}
+
+.hero-tagline{
+  font-size:18px;font-weight:300;
+  color:var(--muted);margin:1.5rem 0 2.5rem;
+  max-width:520px;line-height:1.6;
+}
+.hero-tagline strong{color:var(--text);font-weight:500}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--accent);color:#fff;
+  padding:14px 32px;border:none;
+  font-family:'Raleway',sans-serif;
+  font-size:13px;font-weight:500;
+  letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  transition:background 0.2s,transform 0.15s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-primary:hover{background:var(--accent-dim);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:var(--aqua);
+  padding:13px 32px;
+  border:1px solid var(--aqua);
+  font-family:'Raleway',sans-serif;
+  font-size:13px;font-weight:500;
+  letter-spacing:1.5px;text-transform:uppercase;
+  text-decoration:none;display:inline-block;
+  transition:all 0.2s;
+}
+.btn-ghost:hover{background:rgba(62,207,184,0.08);transform:translateY(-2px)}
+
+.hero-stats{
+  display:flex;gap:3rem;
+  margin-top:4rem;padding-top:2rem;
+  border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--accent)}
+.hero-stat-label{font-size:12px;color:var(--muted);letter-spacing:1px}
+
+/* ─── SECTIONS ─── */
+section{padding:6rem 2.5rem}
+.section-label{
+  font-size:11px;font-weight:500;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--aqua);margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--aqua)}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,4vw,48px);
+  font-weight:700;font-style:italic;
+  color:var(--text);line-height:1.2;
+  margin-bottom:1.5rem;
+}
+
+/* ─── SOBRE ─── */
+#sobre{background:var(--bg2)}
+.sobre-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+  max-width:1100px;margin:0 auto;
+}
+.sobre-text p{color:var(--muted);font-size:16px;line-height:1.8;margin-bottom:1.25rem}
+.sobre-text p strong{color:var(--text);font-weight:500}
+.sobre-text p em{color:var(--aqua);font-style:normal}
+
+/* SECTOR BADGE */
+.sector-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(62,207,184,0.08);
+  border:1px solid rgba(62,207,184,0.25);
+  color:var(--aqua);
+  font-size:11px;font-weight:500;letter-spacing:1px;
+  padding:6px 14px;margin-bottom:1.5rem;
+}
+
+.sobre-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem}
+.pill{
+  background:rgba(62,207,184,0.08);
+  border:1px solid rgba(62,207,184,0.25);
+  color:var(--aqua);
+  font-size:11px;font-weight:500;letter-spacing:1px;
+  padding:5px 14px;text-transform:uppercase;
+}
+
+.sobre-card{background:var(--bg3);border:1px solid var(--border);padding:2rem}
+.sobre-card-title{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--aqua);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.prob-row{
+  display:flex;align-items:flex-start;gap:1rem;
+  margin-bottom:1.25rem;padding-bottom:1.25rem;
+  border-bottom:1px solid var(--border);
+}
+.prob-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.prob-icon{
+  width:32px;height:32px;
+  background:var(--prob-icon-bg);
+  border:1px solid var(--prob-icon-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.prob-label{font-size:13px;color:var(--text);font-weight:500}
+.prob-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.sol-arrow{font-size:18px;color:var(--aqua);flex-shrink:0;margin-top:6px}
+.sol-label{font-size:12px;color:var(--aqua);font-weight:500}
+
+/* ─── PORTAFOLIO ─── */
+#portafolio{background:var(--bg)}
+.port-inner{max-width:1200px;margin:0 auto}
+.port-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:3rem}
+.pf-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--muted);font-family:'Raleway',sans-serif;
+  font-size:12px;font-weight:500;letter-spacing:1px;
+  text-transform:uppercase;padding:7px 18px;cursor:pointer;
+  transition:all 0.15s;
+}
+.pf-btn:hover,.pf-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.port-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:1.5px;
+}
+.app-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  overflow:hidden;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+  cursor:pointer;display:flex;flex-direction:column;
+}
+.app-card:hover{
+  border-color:var(--aqua);transform:translateY(-4px);
+  z-index:1;box-shadow:0 20px 60px var(--shadow);
+}
+.card-screen{width:100%;height:160px;overflow:hidden;position:relative;background:var(--bg3)}
+.card-screen-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;background:var(--bg3);position:relative;
+}
+.card-screen-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:30px 30px;
+}
+.card-screen-icon{font-size:40px;opacity:0.7;position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4))}
+.card-screen-text{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1}
+.card-accent{height:3px;background:var(--accent);transition:background 0.2s}
+.app-card:hover .card-accent{background:var(--aqua)}
+.card-body{padding:1.25rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.card-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem}
+.card-area{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.card-built-badge{
+  background:rgba(62,207,184,0.1);border:1px solid rgba(62,207,184,0.3);
+  color:var(--aqua);font-size:9px;font-weight:700;padding:2px 8px;letter-spacing:0.5px;
+}
+.card-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:0.5rem;line-height:1.2}
+.card-problem{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:0.75rem;flex:1}
+.card-solution{font-size:12px;color:var(--aqua);font-weight:500;padding-top:0.75rem;border-top:1px solid var(--border)}
+
+/* ─── CASOS ─── */
+#casos{background:var(--bg2)}
+.casos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;margin-top:2rem}
+.caso-card{
+  background:var(--bg3);border:1px solid var(--border);
+  overflow:hidden;transition:border-color 0.2s,transform 0.2s;
+}
+.caso-card:hover{border-color:var(--aqua);transform:translateY(-4px)}
+.caso-img{height:180px;overflow:hidden;position:relative;background:#1a2535}
+.caso-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.4s}
+.caso-card:hover .caso-img img{transform:scale(1.03)}
+.caso-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,31,0.8),transparent)}
+[data-theme="light"] .caso-img-overlay{background:linear-gradient(to top,rgba(200,200,210,0.6),transparent)}
+.caso-tag{
+  position:absolute;top:12px;left:12px;
+  font-size:10px;font-weight:600;padding:3px 10px;letter-spacing:1px;
+}
+.caso-bar{height:3px}
+.caso-body{padding:1.5rem}
+.caso-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.2}
+.caso-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.caso-stats{display:flex;gap:1.5rem}
+.caso-stat-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700}
+.caso-stat-lbl{font-size:11px;color:var(--muted)}
+
+/* Expandable case detail */
+.caso-detail{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.5s ease;
+  border-top:0px solid var(--border);
+}
+.caso-detail.open{max-height:800px;border-top:1px solid var(--border)}
+.caso-detail-inner{padding:1.5rem}
+.caso-toggle{
+  display:flex;align-items:center;gap:6px;
+  margin-top:1rem;font-size:12px;
+  color:var(--aqua);font-weight:500;letter-spacing:1px;
+  cursor:pointer;background:none;border:none;
+  font-family:'Raleway',sans-serif;padding:0;
+  transition:opacity 0.2s;
+}
+.caso-toggle:hover{opacity:0.7}
+.caso-toggle-icon{transition:transform 0.3s;display:inline-block}
+.caso-toggle.open .caso-toggle-icon{transform:rotate(180deg)}
+
+/* Detail content styles */
+.detail-section{margin-bottom:1.25rem}
+.detail-label{font-size:10px;color:var(--aqua);letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-bottom:.5rem}
+.detail-text{font-size:13px;color:var(--muted);line-height:1.7}
+.detail-list{list-style:none}
+.detail-list li{font-size:12px;color:var(--muted);padding:.3rem 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px}
+.detail-list li:last-child{border-bottom:none}
+.detail-list li::before{content:'→';color:var(--aqua);flex-shrink:0;font-size:11px}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem}
+.ba-side-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-bottom:.5rem}
+.ba-item{font-size:11px;color:var(--muted);padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;gap:6px}
+.ba-item:last-child{border-bottom:none}
+.ba-x{color:var(--accent);flex-shrink:0}
+.ba-chk{color:var(--aqua);flex-shrink:0}
+.stack-inline{display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem}
+.stack-tag{background:var(--bg);border:1px solid var(--border);padding:3px 10px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+
+/* ─── IDEAS ─── */
+#ideas{background:var(--bg)}
+.idea-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2.5rem}
+.idea-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--muted);font-family:'Raleway',sans-serif;
+  font-size:11px;font-weight:500;letter-spacing:1px;
+  text-transform:uppercase;padding:6px 16px;cursor:pointer;
+  transition:all 0.15s;
+}
+.idea-btn.active,.idea-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px}
+.idea-card{
+  background:var(--card-bg);border:1px solid var(--border);
+  padding:1.5rem;transition:border-color 0.2s,transform 0.2s;
+}
+.idea-card:hover{transform:translateY(-3px)}
+.idea-card-head{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.idea-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.idea-cat{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+.idea-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.3}
+.idea-prob{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:.6rem}
+.idea-sol{font-size:12px;color:var(--muted);line-height:1.6}
+.idea-cta{
+  margin-top:1rem;padding-top:.75rem;
+  border-top:1px solid var(--border);
+  font-size:11px;font-weight:500;letter-spacing:.5px;
+}
+
+/* ─── PROCESO ─── */
+#proceso{background:var(--bg2)}
+.proceso-inner{max-width:900px;margin:0 auto}
+.proceso-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:3rem}
+.paso{background:var(--bg3);padding:2rem 1.5rem;position:relative;border:1px solid var(--border)}
+.paso-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:rgba(224,48,48,0.15);line-height:1;margin-bottom:1rem}
+.paso-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:0.5rem}
+.paso-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.paso-icon{position:absolute;top:1.5rem;right:1.5rem;font-size:20px;opacity:0.5}
+
+/* ─── CONTACTO ─── */
+#contacto{background:var(--bg)}
+.contact-inner{max-width:700px;margin:0 auto;text-align:center}
+.contact-inner .section-label{justify-content:center}
+.contact-inner .section-label::before{display:none}
+.contact-subtitle{color:var(--muted);font-size:17px;max-width:500px;margin:0 auto 3rem;line-height:1.7}
+.contact-channels{display:flex;justify-content:center;gap:1px;flex-wrap:wrap;margin-bottom:3rem}
+.contact-channel{
+  background:var(--bg2);border:1px solid var(--border);
+  padding:1.5rem 2rem;text-align:left;text-decoration:none;
+  transition:border-color 0.2s,transform 0.15s;min-width:180px;
+}
+.contact-channel:hover{border-color:var(--aqua);transform:translateY(-3px)}
+.ch-icon{font-size:22px;margin-bottom:0.5rem;display:block}
+.ch-label{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:4px}
+.ch-value{font-size:14px;color:var(--text);font-weight:500}
+
+/* Placeholder contact */
+.ph-contact{
+  color:var(--aqua);font-style:italic;
+  border:1px dashed rgba(62,207,184,0.4);
+  background:rgba(62,207,184,0.04);
+  padding:2px 10px;font-size:0.9em;
+}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:2rem 2.5rem;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-brand{font-family:'Raleway',sans-serif;font-weight:200;font-size:15px;letter-spacing:3px;color:var(--muted)}
+.footer-brand span{font-family:'Playfair Display',serif;font-style:italic;color:var(--aqua)}
+.footer-note{font-size:12px;color:var(--muted)}
+.footer-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* ─── NOTICE BANNER ─── */
+.wl-notice{
+  background:rgba(62,207,184,0.06);
+  border-bottom:1px solid rgba(62,207,184,0.2);
+  padding:.5rem 2.5rem;
+  font-family:'DM Mono',monospace;
+  font-size:11px;color:var(--aqua);
+  letter-spacing:1px;
+  display:flex;align-items:center;gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  text-align:center;
+}
+.wl-notice strong{color:var(--text)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  section{padding:4rem 1.5rem}
+  .sobre-grid{grid-template-columns:1fr;gap:3rem}
+  .proceso-steps{grid-template-columns:1fr 1fr}
+  .port-grid{grid-template-columns:1fr}
+  h1{font-size:52px}
+  .hero-stats{gap:2rem}
+  .ba-grid{grid-template-columns:1fr}
+  .brand-placeholder::after{display:none}
+  .wl-notice{padding:.5rem 1.5rem}
+}
+@media(max-width:480px){
+  .proceso-steps{grid-template-columns:1fr}
+  .casos-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- WHITE LABEL NOTICE -->
+<div class="wl-notice">
+  <span>📄</span>
+  <span><strong>Plantilla editable</strong> — Reemplaza <strong>(TU MARCA AQUÍ)</strong>, datos de contacto y capturas con los de tu empresa</span>
+  <span>·</span>
+  <span>Modo: <strong id="themeLabel">Oscuro</strong></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">(TU <span>MARCA)</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#sobre">Nosotros</a></li>
+      <li><a href="#portafolio">Portafolio</a></li>
+      <li><a href="#casos">Casos</a></li>
+      <li><a href="#ideas">Ideas</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Soluciones Digitales · Sector Salud</div>
+    <h1>
+      <span class="h1-first">(TU</span>
+      <span class="h1-last">MARCA)</span>
+    </h1>
+    <p class="hero-tagline">
+      Diseñamos y construimos <strong>herramientas digitales a la medida</strong> de cada área de tu empresa.
+      <em style="color:var(--aqua)">Tu organización tiene procesos únicos. Tus herramientas también deberían serlo.</em>
+    </p>
+    <div class="hero-ctas">
+      <a href="#portafolio" class="btn-primary">Ver portafolio</a>
+      <a href="#casos" class="btn-ghost">Casos de estudio</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">15+</div><div class="hero-stat-label">soluciones desarrolladas</div></div>
+      <div><div class="hero-stat-num">8</div><div class="hero-stat-label">apps en producción</div></div>
+      <div><div class="hero-stat-num">5</div><div class="hero-stat-label">áreas cubiertas</div></div>
+      <div><div class="hero-stat-num">3k+</div><div class="hero-stat-label">usuarios en base de datos gestionada</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-text">
+      <div class="section-label">Quiénes somos</div>
+      <h2 class="section-title">No solo desarrollamos.<br>Resolvemos problemas.</h2>
+      <div class="sector-badge">🏥 Especialización en sector salud y óptica</div>
+      <p>Somos un equipo de desarrollo de <strong>herramientas internas y automatización de procesos</strong> para empresas del sector salud. Combinamos formación técnica con experiencia directa construyendo sistemas reales para operaciones reales.</p>
+      <p>Hemos construido más de 8 aplicaciones que hoy usan diariamente equipos de ventas, logística, operaciones y marketing en empresas del sector. No son prototipos: son sistemas vivos, con usuarios reales y problemas reales resueltos.</p>
+      <p>Nuestro diferencial es que <strong>entendemos el negocio antes de escribir código</strong>. Cada solución nace de un proceso que no funcionaba bien.</p>
+      <div class="sobre-pills">
+        <span class="pill">PHP · MySQL</span>
+        <span class="pill">JavaScript</span>
+        <span class="pill">AppSheet</span>
+        <span class="pill">Google Sheets</span>
+        <span class="pill">HTML · CSS</span>
+        <span class="pill">APIs REST</span>
+        <span class="pill">WordPress</span>
+        <span class="pill">Looker Studio</span>
+      </div>
+    </div>
+    <div>
+      <div class="sobre-card">
+        <div class="sobre-card-title">// qué solucionamos</div>
+        <div class="prob-row">
+          <div class="prob-icon">📋</div>
+          <div>
+            <div class="prob-label">Procesos en Excel o WhatsApp</div>
+            <div class="prob-desc">Registros manuales, datos dispersos, cero trazabilidad.</div>
+          </div>
+          <div class="sol-arrow">→</div>
+          <div><div class="sol-label">Sistema a la medida con historial y alertas</div></div>
+        </div>
+        <div class="prob-row">
+          <div class="prob-icon">🔍</div>
+          <div>
+            <div class="prob-label">Sin visibilidad del negocio</div>
+            <div class="prob-desc">No sabes qué vende más, quién entregó, qué está pendiente.</div>
+          </div>
+          <div class="sol-arrow">→</div>
+          <div><div class="sol-label">Dashboard gerencial en tiempo real</div></div>
+        </div>
+        <div class="prob-row">
+          <div class="prob-icon">⏰</div>
+          <div>
+            <div class="prob-label">Tareas repetitivas que quitan tiempo</div>
+            <div class="prob-desc">Consultar guías, enviar correos, cotizar, registrar.</div>
+          </div>
+          <div class="sol-arrow">→</div>
+          <div><div class="sol-label">Automatización con un clic</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="port-inner">
+    <div class="section-label">Portafolio real</div>
+    <h2 class="section-title">Apps construidas.<br>No promesas.</h2>
+    <div class="port-filter">
+      <button class="pf-btn active" onclick="filterCards('all',this)">Todas</button>
+      <button class="pf-btn" onclick="filterCards('ventas',this)">Ventas</button>
+      <button class="pf-btn" onclick="filterCards('logistica',this)">Logística</button>
+      <button class="pf-btn" onclick="filterCards('operaciones',this)">Operaciones</button>
+      <button class="pf-btn" onclick="filterCards('marketing',this)">Marketing</button>
+      <button class="pf-btn" onclick="filterCards('talento',this)">Talento</button>
+    </div>
+    <div class="port-grid" id="portGrid"></div>
+  </div>
+</section>
+
+<!-- CASOS DE ESTUDIO (expandibles inline) -->
+<section id="casos">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Casos de estudio</div>
+    <h2 class="section-title">Cada app tiene<br>una historia detrás.</h2>
+    <p style="color:var(--muted);font-size:16px;max-width:520px;margin-bottom:3rem;line-height:1.7">No solo mostramos capturas — explicamos el problema real, cómo se resolvió y qué cambió. Haz clic en cualquier caso para ver el detalle.</p>
+
+    <div class="casos-grid">
+
+      <!-- CASO 1: BANCO DE LENTES -->
+      <div class="caso-card">
+        <div class="caso-img" style="background:#1a2535">
+          <img src="https://colorsonica-afk.github.io/portfolio/cap-banco-lentes.png" alt="Banco de Lentes" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--bg3)\'>👁️</div>'">
+          <div class="caso-img-overlay"></div>
+          <div class="caso-tag" style="background:rgba(62,207,184,0.15);border:1px solid rgba(62,207,184,0.3);color:var(--aqua)">OPERACIONES</div>
+        </div>
+        <div class="caso-bar" style="background:var(--accent)"></div>
+        <div class="caso-body">
+          <div class="caso-title">Banco de Lentes</div>
+          <div class="caso-desc">5.000 unidades de inventario sin control convertidas en un sistema de préstamos con 6 áreas integradas, alertas automáticas y trazabilidad completa para una empresa del sector óptico-salud.</div>
+          <div class="caso-stats">
+            <div><div class="caso-stat-num" style="color:var(--accent)">6</div><div class="caso-stat-lbl">áreas integradas</div></div>
+            <div><div class="caso-stat-num" style="color:var(--accent)">30d</div><div class="caso-stat-lbl">ciclo controlado</div></div>
+            <div><div class="caso-stat-num" style="color:var(--accent)">9</div><div class="caso-stat-lbl">pantallas</div></div>
+          </div>
+          <button class="caso-toggle" onclick="toggleCaso(this)">
+            Ver caso completo <span class="caso-toggle-icon">▾</span>
+          </button>
+        </div>
+        <div class="caso-detail">
+          <div class="caso-detail-inner">
+            <div class="detail-section">
+              <div class="detail-label">El problema</div>
+              <div class="detail-text">El inventario de muestras vivía en Excel sin trazabilidad. No había historial de a quién se prestó cada unidad, cuándo debía volver ni qué estaba vencido. El equipo gestionaba 5.000+ ítems a ciegas.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Puntos de dolor</div>
+              <ul class="detail-list">
+                <li>Sin historial de movimientos por ítem</li>
+                <li>Devoluciones sin registro ni fecha de vencimiento</li>
+                <li>Sin alertas cuando un préstamo se vencía</li>
+                <li>Flujo de aprobación inexistente — todo por WhatsApp</li>
+                <li>Sin trazabilidad por área ni por responsable</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Antes vs. Después</div>
+              <div class="ba-grid">
+                <div>
+                  <div class="ba-side-title" style="color:var(--accent)">Antes</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Excel sin control de versiones</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Sin alertas de vencimiento</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Préstamos sin aprobación formal</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Sin historial de movimientos</div>
+                </div>
+                <div>
+                  <div class="ba-side-title" style="color:var(--aqua)">Después</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Sistema web con 9 pantallas</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Alertas automáticas por email</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Flujo de aprobación digital</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Actividad reciente en tiempo real</div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Stack tecnológico</div>
+              <div class="stack-inline">
+                <span class="stack-tag">PHP</span>
+                <span class="stack-tag">MySQL</span>
+                <span class="stack-tag">JavaScript</span>
+                <span class="stack-tag">Google Auth</span>
+                <span class="stack-tag">HTML · CSS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASO 2: SOY DEL PARCHE -->
+      <div class="caso-card">
+        <div class="caso-img" style="background:#0e2020">
+          <img src="https://colorsonica-afk.github.io/portfolio/cap-barrio.png" alt="App comunitaria" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--bg3)\'>🏘️</div>'">
+          <div class="caso-img-overlay"></div>
+          <div class="caso-tag" style="background:rgba(0,182,178,0.15);border:1px solid rgba(0,182,178,0.3);color:#00B6B2">APP MÓVIL · COMUNIDAD</div>
+        </div>
+        <div class="caso-bar" style="background:#016D6D"></div>
+        <div class="caso-body">
+          <div class="caso-title">App Comunitaria Hiperlocal</div>
+          <div class="caso-desc">Plataforma digital que conecta comercios, vecinos y actividades de una comunidad — con promociones, muro de noticias, regalos y mapa interactivo. Infraestructura 100% de costo cero.</div>
+          <div class="caso-stats">
+            <div><div class="caso-stat-num" style="color:#00B6B2">3</div><div class="caso-stat-lbl">tipos de usuario</div></div>
+            <div><div class="caso-stat-num" style="color:#00B6B2">8</div><div class="caso-stat-lbl">módulos</div></div>
+            <div><div class="caso-stat-num" style="color:#00B6B2">$0</div><div class="caso-stat-lbl">infraestructura</div></div>
+          </div>
+          <button class="caso-toggle" onclick="toggleCaso(this)">
+            Ver caso completo <span class="caso-toggle-icon">▾</span>
+          </button>
+        </div>
+        <div class="caso-detail">
+          <div class="caso-detail-inner">
+            <div class="detail-section">
+              <div class="detail-label">El problema</div>
+              <div class="detail-text">Un barrio o comunidad no tenía forma de conectar sus comercios, eventos y vecinos en un solo lugar digital. La información circulaba por grupos de WhatsApp sin estructura y los negocios locales no tenían visibilidad.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Módulos desarrollados</div>
+              <ul class="detail-list">
+                <li>Muro comunitario de noticias y eventos</li>
+                <li>Directorio de comercios con perfil propio</li>
+                <li>Sistema de promociones y ofertas</li>
+                <li>Programa de regalos por puntos</li>
+                <li>Mapa interactivo del barrio</li>
+                <li>Panel de administración para el gestor</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Stack tecnológico</div>
+              <div class="stack-inline">
+                <span class="stack-tag">PHP</span>
+                <span class="stack-tag">MySQL</span>
+                <span class="stack-tag">PWA</span>
+                <span class="stack-tag">Leaflet Maps</span>
+                <span class="stack-tag">$0 hosting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASO 3: DISTRIBUCIÓN MOTOS -->
+      <div class="caso-card">
+        <div class="caso-img" style="background:#0a1a2e">
+          <img src="https://colorsonica-afk.github.io/portfolio/dist-resumen.png" alt="Distribución con GPS" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--bg3)\'>🏍️</div>'">
+          <div class="caso-img-overlay"></div>
+          <div class="caso-tag" style="background:rgba(55,138,221,0.15);border:1px solid rgba(55,138,221,0.3);color:#378add">LOGÍSTICA · GPS</div>
+        </div>
+        <div class="caso-bar" style="background:#378add"></div>
+        <div class="caso-body">
+          <div class="caso-title">Distribución con GPS en Tiempo Real</div>
+          <div class="caso-desc">De rutero en papel y kilómetros anotados a mano, a GPS en tiempo real, entrega con foto y firma digital, OTIF semanal y mensajería integrada supervisor-conductor.</div>
+          <div class="caso-stats">
+            <div><div class="caso-stat-num" style="color:#378add">4</div><div class="caso-stat-lbl">conductores activos</div></div>
+            <div><div class="caso-stat-num" style="color:#378add">6</div><div class="caso-stat-lbl">módulos</div></div>
+            <div><div class="caso-stat-num" style="color:#378add">GPS</div><div class="caso-stat-lbl">tiempo real</div></div>
+          </div>
+          <button class="caso-toggle" onclick="toggleCaso(this)">
+            Ver caso completo <span class="caso-toggle-icon">▾</span>
+          </button>
+        </div>
+        <div class="caso-detail">
+          <div class="caso-detail-inner">
+            <div class="detail-section">
+              <div class="detail-label">El problema</div>
+              <div class="detail-text">La distribución era una caja negra. Los conductores salían con rutero en papel y nadie sabía dónde estaban. Las devoluciones llegaban sin registro de por qué, cuándo ni quién intentó la entrega. Sin GPS, sin OTIF, sin trazabilidad.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Antes vs. Después</div>
+              <div class="ba-grid">
+                <div>
+                  <div class="ba-side-title" style="color:var(--accent)">Antes</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Rutero en papel, sin GPS</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Devoluciones sin registro</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Km a mano sin verificación</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Sin OTIF ni métricas</div>
+                </div>
+                <div>
+                  <div class="ba-side-title" style="color:var(--aqua)">Después</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Mapa en tiempo real</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Entrega con foto + firma + GPS</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Km automáticos por GPS</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>OTIF diario y semanal</div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Stack tecnológico</div>
+              <div class="stack-inline">
+                <span class="stack-tag">PHP · MySQL</span>
+                <span class="stack-tag">Geolocation API</span>
+                <span class="stack-tag">Leaflet + OSM</span>
+                <span class="stack-tag">Canvas API</span>
+                <span class="stack-tag">PHPSpreadsheet</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CASO 4: ENVÍOS MASIVOS -->
+      <div class="caso-card">
+        <div class="caso-img" style="background:#111115">
+          <img src="https://colorsonica-afk.github.io/portfolio/cap-envios-masivos.png" alt="Envíos Masivos" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--bg3)\'>📧</div>'">
+          <div class="caso-img-overlay"></div>
+          <div class="caso-tag" style="background:rgba(62,207,110,0.15);border:1px solid rgba(62,207,110,0.3);color:#3ecf6e">MARKETING · AUTOMATIZACIÓN</div>
+        </div>
+        <div class="caso-bar" style="background:#3ecf6e"></div>
+        <div class="caso-body">
+          <div class="caso-title">Motor de Envíos Masivos</div>
+          <div class="caso-desc">Campañas de email masivas desde Google Sheets, sin plataformas externas. 1.425 correos enviados, 156 rebotes detectados automáticamente y base de datos que se limpia sola con cada envío.</div>
+          <div class="caso-stats">
+            <div><div class="caso-stat-num" style="color:#3ecf6e">3.4k</div><div class="caso-stat-lbl">contactos en BD</div></div>
+            <div><div class="caso-stat-num" style="color:#3ecf6e">$0</div><div class="caso-stat-lbl">costo plataforma</div></div>
+            <div><div class="caso-stat-num" style="color:#3ecf6e">Auto</div><div class="caso-stat-lbl">limpieza rebotes</div></div>
+          </div>
+          <button class="caso-toggle" onclick="toggleCaso(this)">
+            Ver caso completo <span class="caso-toggle-icon">▾</span>
+          </button>
+        </div>
+        <div class="caso-detail">
+          <div class="caso-detail-inner">
+            <div class="detail-section">
+              <div class="detail-label">El problema</div>
+              <div class="detail-text">Las campañas dependían de plataformas externas costosas y nadie procesaba los rebotes. La base de datos acumulaba correos muertos que deterioraban la reputación del dominio y disparaban el costo por contacto.</div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Arquitectura del sistema</div>
+              <ul class="detail-list">
+                <li>Google Sheets como base de datos de contactos</li>
+                <li>Apps Script como motor de envío nativo</li>
+                <li>Gmail nativo — sin API de terceros</li>
+                <li>Inbox captura rebotes (MAILER-DAEMON) automáticamente</li>
+                <li>BD se actualiza sola tras cada campaña</li>
+              </ul>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Antes vs. Después</div>
+              <div class="ba-grid">
+                <div>
+                  <div class="ba-side-title" style="color:var(--accent)">Antes</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Plataforma externa con costo mensual</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>Rebotes sin procesar</div>
+                  <div class="ba-item"><span class="ba-x">✕</span>BD que solo crecía y ensuciaba</div>
+                </div>
+                <div>
+                  <div class="ba-side-title" style="color:var(--aqua)">Después</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>Envío nativo desde Gmail — $0</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>156 rebotes procesados automáticamente</div>
+                  <div class="ba-item"><span class="ba-chk">✓</span>BD mejora con cada campaña</div>
+                </div>
+              </div>
+            </div>
+            <div class="detail-section">
+              <div class="detail-label">Stack tecnológico</div>
+              <div class="stack-inline">
+                <span class="stack-tag">Google Sheets</span>
+                <span class="stack-tag">Apps Script</span>
+                <span class="stack-tag">Gmail API</span>
+                <span class="stack-tag">PHP · JS</span>
+                <span class="stack-tag">OAuth Google</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IDEAS -->
+<section id="ideas">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label">Más allá del portafolio</div>
+    <h2 class="section-title">¿Tu área no está aquí?<br>Puede que ya tengamos la solución.</h2>
+    <p style="color:var(--muted);font-size:16px;max-width:580px;margin-bottom:2.5rem;line-height:1.7">Apps que podemos construir para tu empresa — organizadas por área. Si reconoces algún problema, conversemos.</p>
+
+    <div class="idea-filters" id="ideaFilters">
+      <button class="idea-btn active" onclick="filterIdeas('all',this)">Todas</button>
+      <button class="idea-btn" onclick="filterIdeas('finanzas',this)">💰 Administración</button>
+      <button class="idea-btn" onclick="filterIdeas('rrhh',this)">👥 RR.HH.</button>
+      <button class="idea-btn" onclick="filterIdeas('ventas',this)">📈 Ventas</button>
+      <button class="idea-btn" onclick="filterIdeas('ops',this)">⚙️ Operaciones</button>
+      <button class="idea-btn" onclick="filterIdeas('cliente',this)">🎧 Atención al cliente</button>
+    </div>
+
+    <div class="ideas-grid" id="ideasGrid"></div>
+
+    <div style="margin-top:3rem;text-align:center;padding:2rem;background:var(--bg2);border:1px solid var(--border)">
+      <div style="font-size:11px;color:var(--aqua);letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem">¿La reconoces?</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--text);margin-bottom:.75rem">Si reconoces tu problema en esta lista, ya estamos a mitad del camino.</div>
+      <a href="#contacto" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;margin-top:.5rem">
+        Hablemos de tu caso →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="proceso-inner">
+    <div class="section-label">Cómo trabajamos</div>
+    <h2 class="section-title">Simple, directo,<br>sin vueltas.</h2>
+    <div class="proceso-steps">
+      <div class="paso">
+        <div class="paso-num">01</div>
+        <div class="paso-icon">🎯</div>
+        <div class="paso-title">Diagnóstico</div>
+        <div class="paso-desc">Entendemos tu proceso, el dolor real y qué resultado necesitas. Sin vender tecnología innecesaria.</div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">02</div>
+        <div class="paso-icon">📐</div>
+        <div class="paso-title">Propuesta</div>
+        <div class="paso-desc">Diseñamos la solución más simple que resuelva el problema. Mostramos un prototipo antes de desarrollar.</div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">03</div>
+        <div class="paso-icon">⚙️</div>
+        <div class="paso-title">Desarrollo</div>
+        <div class="paso-desc">Construimos la app a la medida de tu área y equipo. Con acceso para que veas el avance en vivo.</div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">04</div>
+        <div class="paso-icon">🚀</div>
+        <div class="paso-title">Soporte</div>
+        <div class="paso-desc">Acompañamos el lanzamiento y los ajustes post-entrega. El sistema crece con tu empresa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-inner">
+    <div class="section-label">Hablemos</div>
+    <h2 class="section-title">¿Tienes un proceso<br>que se puede mejorar?</h2>
+    <p class="contact-subtitle">Cuéntanos el problema. Si tenemos una solución para tu área, te lo decimos directo. Si no, también.</p>
+    <div class="contact-channels">
+      <a href="#" class="contact-channel">
+        <span class="ch-icon">💬</span>
+        <span class="ch-label">WhatsApp</span>
+        <span class="ch-value ph-contact">(TU NÚMERO)</span>
+      </a>
+      <a href="#" class="contact-channel">
+        <span class="ch-icon">📧</span>
+        <span class="ch-label">Email</span>
+        <span class="ch-value ph-contact">(TU CORREO)</span>
+      </a>
+      <a href="#" class="contact-channel">
+        <span class="ch-icon">🌐</span>
+        <span class="ch-label">Web</span>
+        <span class="ch-value ph-contact">(TU SITIO)</span>
+      </a>
+    </div>
+    <a href="#" class="btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Iniciar conversación
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">(tu <span>marca)</span> · Soluciones Digitales</div>
+  <div class="footer-note"><span class="footer-dot"></span>Disponible para proyectos · 2026</div>
+</footer>
+
+<script>
+/* ─── THEME TOGGLE ─── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+  document.getElementById('themeLabel').textContent = isDark ? 'Claro' : 'Oscuro';
+  localStorage.setItem('wl-theme', isDark ? 'light' : 'dark');
+}
+// Restore saved theme
+(function(){
+  const saved = localStorage.getItem('wl-theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('themeBtn').textContent = saved === 'light' ? '🌙' : '☀️';
+    document.getElementById('themeLabel').textContent = saved === 'light' ? 'Claro' : 'Oscuro';
+  }
+})();
+
+/* ─── CASO EXPANDIBLE ─── */
+function toggleCaso(btn) {
+  const detail = btn.closest('.caso-body').nextElementSibling;
+  const isOpen = detail.classList.contains('open');
+  // Close all first
+  document.querySelectorAll('.caso-detail.open').forEach(d => {
+    d.classList.remove('open');
+    d.previousElementSibling.querySelector('.caso-toggle').classList.remove('open');
+  });
+  if (!isOpen) {
+    detail.classList.add('open');
+    btn.classList.add('open');
+    // Smooth scroll to card
+    setTimeout(() => btn.closest('.caso-card').scrollIntoView({behavior:'smooth',block:'nearest'}), 50);
+  }
+}
+
+/* ─── PORTAFOLIO GRID ─── */
+const apps = [
+  { area:'ventas', areaLabel:'Ventas', name:'Central de Llamadas', built:true,
+    problem:'El equipo comercial llama sin orden, sin historial y sin seguimiento.',
+    solution:'CRM ligero: 9.532 contactos, historial de llamadas, estados y asignación por consultora.', icon:'☎️' },
+  { area:'logistica', areaLabel:'Logística', name:'Rastreo de Guías', built:true,
+    problem:'El equipo consultaba cada guía manualmente en las páginas de transportadoras.',
+    solution:'Carga masiva desde Excel, rastreo automático multi-transportadora, alertas de retraso.', icon:'📦' },
+  { area:'marketing', areaLabel:'Marketing', name:'Mailer Masivo', built:true,
+    problem:'Enviar correos a clientes era manual, lento y dependía de plataformas costosas.',
+    solution:'Más de 1.400 correos en una campaña. Carga por base de datos, plantilla HTML y métricas en vivo.', icon:'✉️' },
+  { area:'operaciones', areaLabel:'Operaciones', name:'Banco de Inventario', built:true,
+    problem:'El inventario de muestras vivía en Excel sin trazabilidad de movimientos.',
+    solution:'Sistema de préstamos, estados por ítem, flujo de trabajo y actividad reciente en tiempo real.', icon:'👁️' },
+  { area:'talento', areaLabel:'Talento', name:'Portal del Empleado', built:true,
+    problem:'Las herramientas de la empresa estaban dispersas en chats, correos y bookmarks.',
+    solution:'Intranet unificada con acceso a todos los aplicativos, por área y por rol.', icon:'🏢' },
+  { area:'talento', areaLabel:'Inteligencia', name:'Centro de Datos', built:true,
+    problem:'Los reportes gerenciales se armaban manualmente cada mes con datos de varias fuentes.',
+    solution:'Panel consolidado: ventas, comparativos mensuales y exportables en un solo lugar.', icon:'📈' },
+  { area:'operaciones', areaLabel:'Operaciones', name:'POS Personalizado', built:true,
+    problem:'Un negocio necesitaba un sistema de pedidos propio, sin pagar licencias genéricas.',
+    solution:'POS a medida: pedidos por mesa, mostrador o para llevar, dashboard y control de productos.', icon:'☕' },
+  { area:'marketing', areaLabel:'Digital', name:'App Hiperlocal de Comunidad', built:true,
+    problem:'Una comunidad no tenía forma de conectar comercios, eventos y vecinos en un solo lugar.',
+    solution:'App con promos, muro comunitario, tiendas, actividades y sistema de regalos.', icon:'🏘️' },
+  { area:'marketing', areaLabel:'Marketing', name:'Calculadoras de Producto', built:true,
+    problem:'Los vendedores y clientes no calculaban rápido precios, equivalencias y combinaciones.',
+    solution:'Herramientas interactivas embebibles en web o intranet, personalizadas por categoría.', icon:'🧮' },
+  { area:'ventas', areaLabel:'Ventas', name:'Pipeline de Oportunidades', built:false,
+    problem:'No hay visibilidad sobre en qué etapa está cada cliente potencial.',
+    solution:'Tablero visual de embudo de ventas, alertas de seguimiento y reportes por vendedor.', icon:'🎯' },
+  { area:'ventas', areaLabel:'Ventas', name:'Cotizador Inteligente', built:false,
+    problem:'Hacer una cotización toma tiempo y queda perdida en WhatsApp.',
+    solution:'Generador de PDF con precios, descuentos configurables y envío directo al cliente.', icon:'🗒️' },
+  { area:'logistica', areaLabel:'Logística', name:'Control de Devoluciones', built:false,
+    problem:'Las devoluciones se pierden o quedan sin procesar por semanas.',
+    solution:'Registro, estado del proceso y trazabilidad hasta el reingreso al inventario.', icon:'🔄' },
+];
+
+let activeFilter = 'all';
+function filterCards(area, btn) {
+  activeFilter = area;
+  document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+function renderGrid() {
+  const grid = document.getElementById('portGrid');
+  grid.innerHTML = '';
+  const visible = activeFilter === 'all' ? apps : apps.filter(a => a.area === activeFilter);
+  visible.forEach((app, i) => {
+    const el = document.createElement('div');
+    el.className = 'app-card';
+    el.innerHTML = `
+      <div class="card-screen">
+        <div class="card-screen-placeholder">
+          <div class="card-screen-icon">${app.icon}</div>
+          <div class="card-screen-text">${app.areaLabel}</div>
+        </div>
+      </div>
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-area">${app.areaLabel}</span>
+          ${app.built ? '<span class="card-built-badge">✓ En producción</span>' : '<span style="font-size:9px;color:var(--muted);border:1px solid var(--border);padding:2px 8px;">Próximamente</span>'}
+        </div>
+        <div class="card-name">${app.name}</div>
+        <div class="card-problem">${app.problem}</div>
+        <div class="card-solution">→ ${app.solution}</div>
+      </div>
+    `;
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(12px)';
+    grid.appendChild(el);
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.3s,transform 0.3s,border-color 0.2s,box-shadow 0.2s';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }, 60 * i);
+  });
+}
+renderGrid();
+
+/* ─── IDEAS GRID ─── */
+const ideas = [
+  { cat:'finanzas', icon:'🧾', color:'#f0a500', name:'Gestor de Facturación y Gastos', problem:'Facturas dispersas, gastos sin registrar, flujo de caja invisible.', solution:'Emite facturas, registra gastos con foto y visualiza el flujo de caja en tiempo real.' },
+  { cat:'finanzas', icon:'🧮', color:'#f0a500', name:'Calculadora de Impuestos', problem:'Las PYMES estiman IVA y renta a mano o no lo hacen.', solution:'Calcula automáticamente los pagos según los parámetros de tu empresa.' },
+  { cat:'finanzas', icon:'📦', color:'#f0a500', name:'Control de Inventario Inteligente', problem:'El stock se maneja en Excel sin alertas ni historial de movimientos.', solution:'Gestión de stock con alertas automáticas al llegar al nivel crítico.' },
+  { cat:'rrhh', icon:'🕐', color:'#a78bfa', name:'Portal del Empleado y Control Horario', problem:'El fichaje es manual, las vacaciones por WhatsApp y las nóminas en el correo.', solution:'Registro de entrada/salida, gestión de vacaciones y descarga de nóminas.' },
+  { cat:'rrhh', icon:'🗂️', color:'#a78bfa', name:'Gestor de Selección (ATS)', problem:'Los CVs llegan por email, no hay seguimiento de candidatos.', solution:'Centraliza currículums, califica candidatos y gestiona etapas de entrevistas.' },
+  { cat:'rrhh', icon:'😊', color:'#a78bfa', name:'Encuestas de Clima Laboral', problem:'No hay forma de medir cómo se siente el equipo de forma anónima.', solution:'Mide la satisfacción del equipo y genera reportes de felicidad laboral.' },
+  { cat:'ventas', icon:'👤', color:'#3ecfb8', name:'Mini CRM Personalizado', problem:'Los contactos viven en el celular del vendedor y el seguimiento se olvida.', solution:'CRM ligero para equipos de 2 a 5 personas: contactos, historial y seguimiento.' },
+  { cat:'ventas', icon:'📗', color:'#3ecfb8', name:'Catálogo Digital Interactivo', problem:'El catálogo es un PDF desactualizado o una lista de WhatsApp sin precios claros.', solution:'Convierte tu lista de productos en un catálogo web para compartir por WhatsApp.' },
+  { cat:'ventas', icon:'📊', color:'#3ecfb8', name:'Dashboard de Métricas Digitales', problem:'Las estadísticas de redes sociales están en 3 plataformas distintas.', solution:'Un panel que unifica las estadísticas de tus plataformas en un solo lugar.' },
+  { cat:'ops', icon:'📅', color:'#378add', name:'Gestor de Turnos y Citas', problem:'Las citas van por WhatsApp, los cruces de horarios son frecuentes y no hay recordatorios.', solution:'Agenda digital para consultorios, talleres o servicios con recordatorios automáticos.' },
+  { cat:'ops', icon:'📚', color:'#378add', name:'Wiki Interna de Procesos', problem:'Los manuales y contraseñas están en chats y carpetas que nadie recuerda dónde están.', solution:'Espacio centralizado para procesos, manuales y accesos compartidos de la empresa.' },
+  { cat:'ops', icon:'🗃️', color:'#378add', name:'Tablero Kanban de Proyectos', problem:'El progreso de los proyectos no es visible y los plazos se incumplen.', solution:'Tablero visual con tarjetas, fechas límite y responsables para cada tarea.' },
+  { cat:'cliente', icon:'🎫', color:'#e03030', name:'Sistema de Tickets de Soporte', problem:'Los reclamos llegan por correo, WhatsApp y teléfono — sin orden ni seguimiento.', solution:'Gestión de soporte organizada: cada caso tiene número, estado y responsable.' },
+  { cat:'cliente', icon:'🤖', color:'#e03030', name:'Chatbot de Preguntas Frecuentes', problem:'El equipo responde las mismas preguntas básicas todo el día.', solution:'Interfaz que responde dudas comunes automáticamente antes de derivar a un agente.' },
+];
+
+const catNames = {finanzas:'Adm. y Finanzas',rrhh:'RR.HH.',ventas:'Ventas y Marketing',ops:'Operaciones',cliente:'Atención al cliente'};
+let activeIdea = 'all';
+
+function filterIdeas(cat, btn) {
+  activeIdea = cat;
+  document.querySelectorAll('.idea-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderIdeas();
+}
+function renderIdeas() {
+  const grid = document.getElementById('ideasGrid');
+  grid.innerHTML = '';
+  const visible = activeIdea === 'all' ? ideas : ideas.filter(i => i.cat === activeIdea);
+  visible.forEach((idea, i) => {
+    const el = document.createElement('div');
+    el.className = 'idea-card';
+    el.style.cssText = `opacity:0;transform:translateY(10px)`;
+    el.onmouseover = () => el.style.borderColor = idea.color;
+    el.onmouseout = () => el.style.borderColor = 'var(--border)';
+    el.innerHTML = `
+      <div class="idea-card-head">
+        <div class="idea-icon" style="background:${idea.color}18;border:1px solid ${idea.color}40">${idea.icon}</div>
+        <div class="idea-cat" style="color:${idea.color}">${catNames[idea.cat]}</div>
+      </div>
+      <div class="idea-name">${idea.name}</div>
+      <div class="idea-prob"><span style="color:${idea.color}">Problema:</span> ${idea.problem}</div>
+      <div class="idea-sol"><span style="color:var(--aqua)">Solución:</span> ${idea.solution}</div>
+      <div class="idea-cta"><a href="#contacto" style="color:${idea.color};text-decoration:none">Me interesa esta app →</a></div>
+    `;
+    grid.appendChild(el);
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.25s,transform 0.25s,border-color 0.2s';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }, 40 * i);
+  });
+}
+renderIdeas();
+</script>
+</body>
+</html>
