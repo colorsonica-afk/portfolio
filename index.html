@@ -621,6 +621,7 @@
     <li><a href="#sobre">Sobre mí</a></li>
     <li><a href="#portafolio">Portafolio</a></li>
     <li><a href="#casos">Casos</a></li>
+    <li><a href="#ideas">Ideas</a></li>
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -743,6 +744,36 @@
     </div>
 
     <div class="port-grid" id="portGrid"></div>
+  </div>
+</section>
+
+<!-- IDEAS / CATÁLOGO DE POSIBILIDADES -->
+<section id="ideas" style="background:var(--dark2);padding:6rem 2.5rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label fade-in">Más allá del portafolio</div>
+    <h2 class="section-title fade-in">¿Tu área no está aquí?<br>Puede que ya tenga la solución.</h2>
+    <p style="color:var(--muted);font-size:16px;max-width:580px;margin-bottom:3rem;line-height:1.7">Estas son apps que puedo construir para tu empresa — organizadas por área. Si reconoces algún problema, escríbeme.</p>
+
+    <!-- Filtros de categorías -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2.5rem" id="ideaFilters">
+      <button onclick="filterIdeas('all',this)" style="background:var(--red);border:1px solid var(--red);color:#fff;font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;cursor:pointer" class="idea-btn active-idea">Todas</button>
+      <button onclick="filterIdeas('finanzas',this)" style="background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;cursor:pointer" class="idea-btn">💰 Administración</button>
+      <button onclick="filterIdeas('rrhh',this)" style="background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;cursor:pointer" class="idea-btn">👥 RR.HH.</button>
+      <button onclick="filterIdeas('ventas',this)" style="background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;cursor:pointer" class="idea-btn">📈 Ventas</button>
+      <button onclick="filterIdeas('ops',this)" style="background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;cursor:pointer" class="idea-btn">⚙️ Operaciones</button>
+      <button onclick="filterIdeas('cliente',this)" style="background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;cursor:pointer" class="idea-btn">🎧 Atención al cliente</button>
+    </div>
+
+    <div id="ideasGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px"></div>
+
+    <div style="margin-top:3rem;text-align:center;padding:2rem;background:var(--dark3);border:1px solid var(--border)">
+      <div style="font-size:11px;color:var(--aqua);letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem">¿La ves?</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--text);margin-bottom:.75rem">Si reconoces tu problema en esta lista, ya estamos a mitad del camino.</div>
+      <a href="https://wa.me/573192414610?text=Hola%20Daniel%2C%20vi%20el%20cat%C3%A1logo%20de%20apps%20y%20me%20interesa%20una%20para%20mi%20empresa." target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;margin-top:.5rem">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hablemos de tu caso
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1013,6 +1044,73 @@ function renderGrid() {
 
 renderGrid();
 setTimeout(() => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')), 100);
+
+// ─── IDEAS / CATÁLOGO ───
+const ideas = [
+  // FINANZAS
+  { cat:'finanzas', icon:'🧾', color:'#f0a500', name:'Gestor de Facturación y Gastos', problem:'Facturas dispersas, gastos sin registrar, flujo de caja invisible.', solution:'Emite facturas, sube fotos de tickets y visualiza el flujo de caja en tiempo real.' },
+  { cat:'finanzas', icon:'🧮', color:'#f0a500', name:'Calculadora de Impuestos y Retenciones', problem:'Las PYMES estiman IVA y renta a mano o no lo hacen.', solution:'Calcula automáticamente los pagos de IVA o renta según los parámetros de tu empresa.' },
+  { cat:'finanzas', icon:'📦', color:'#f0a500', name:'Control de Inventario Inteligente', problem:'El stock se maneja en Excel sin alertas ni historial de movimientos.', solution:'Gestión de stock con alertas automáticas cuando un producto llega al nivel crítico.' },
+  // RRHH
+  { cat:'rrhh', icon:'🕐', color:'#a78bfa', name:'Portal del Empleado y Control Horario', problem:'El fichaje es manual, las vacaciones se aprueban por WhatsApp y las nóminas se buscan en el correo.', solution:'Registro de entrada/salida, gestión de vacaciones y descarga de nóminas desde una sola app.' },
+  { cat:'rrhh', icon:'🗂️', color:'#a78bfa', name:'Gestor de Selección (ATS Simple)', problem:'Los CVs llegan por email, no hay seguimiento de candidatos y las etapas se pierden.', solution:'Centraliza currículums, califica candidatos y gestiona las etapas de entrevistas.' },
+  { cat:'rrhh', icon:'😊', color:'#a78bfa', name:'Encuestas de Clima Laboral', problem:'No hay forma de medir cómo se siente el equipo de forma anónima y estructurada.', solution:'Mide la satisfacción del equipo de forma anónima y genera reportes de felicidad laboral.' },
+  // VENTAS
+  { cat:'ventas', icon:'👤', color:'#3ecfb8', name:'Mini CRM Personalizado', problem:'Los contactos viven en el celular del vendedor, el seguimiento se olvida y no hay historial.', solution:'CRM ligero para equipos de 2 a 5 personas: contactos, historial de llamadas y seguimiento.' },
+  { cat:'ventas', icon:'📗', color:'#3ecfb8', name:'Generador de Catálogo Digital', problem:'El catálogo es un PDF desactualizado o una lista de WhatsApp sin fotos ni precios claros.', solution:'Convierte tu lista de productos en un catálogo web interactivo listo para compartir.' },
+  { cat:'ventas', icon:'📊', color:'#3ecfb8', name:'Dashboard de Métricas Digitales', problem:'Las estadísticas de redes sociales están en 3 plataformas distintas y nadie las consolida.', solution:'Un panel que unifica las estadísticas básicas de tus plataformas en un solo lugar.' },
+  // OPERACIONES
+  { cat:'ops', icon:'📅', color:'#378add', name:'Gestor de Turnos y Citas', problem:'Las citas se toman por WhatsApp, los cruces de horarios son frecuentes y no hay recordatorios.', solution:'Agenda digital para peluquerías, consultorios o talleres con recordatorios automáticos.' },
+  { cat:'ops', icon:'📚', color:'#378add', name:'Wiki Interna de Procesos', problem:'Los manuales y contraseñas están en chats, correos y carpetas que nadie recuerda dónde están.', solution:'Espacio centralizado tipo Notion simplificado para procesos, manuales y accesos compartidos.' },
+  { cat:'ops', icon:'🗃️', color:'#378add', name:'Tablero Kanban de Proyectos', problem:'El progreso de los proyectos no es visible, los plazos se incumplen y nadie sabe qué está pendiente.', solution:'Tablero visual con tarjetas, fechas límite y responsables para cada tarea.' },
+  // CLIENTE
+  { cat:'cliente', icon:'🎫', color:'#e03030', name:'Sistema de Tickets de Soporte', problem:'Los reclamos y dudas llegan por correo, WhatsApp y teléfono — sin orden ni seguimiento.', solution:'Gestión de soporte organizada: cada caso tiene número, estado y responsable asignado.' },
+  { cat:'cliente', icon:'🤖', color:'#e03030', name:'Chatbot de Preguntas Frecuentes', problem:'El equipo responde las mismas preguntas básicas todo el día antes de poder atender al humano real.', solution:'Interfaz web que responde dudas comunes automáticamente antes de derivar a un agente.' },
+];
+
+let activeIdea = 'all';
+
+function filterIdeas(cat, btn) {
+  activeIdea = cat;
+  document.querySelectorAll('.idea-btn').forEach(b => {
+    b.style.background = 'transparent';
+    b.style.borderColor = 'var(--border)';
+    b.style.color = 'var(--muted)';
+  });
+  btn.style.background = 'var(--red)';
+  btn.style.borderColor = 'var(--red)';
+  btn.style.color = '#fff';
+  renderIdeas();
+}
+
+function renderIdeas() {
+  const grid = document.getElementById('ideasGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const visible = activeIdea === 'all' ? ideas : ideas.filter(i => i.cat === activeIdea);
+  visible.forEach((idea, idx) => {
+    const el = document.createElement('div');
+    el.style.cssText = `background:var(--dark3);border:1px solid var(--border);padding:1.5rem;transition:border-color 0.2s,transform 0.2s;cursor:default;opacity:0;transform:translateY(12px);transition:opacity 0.25s,transform 0.25s,border-color 0.2s`;
+    el.onmouseover = () => { el.style.borderColor = idea.color; el.style.transform = 'translateY(-3px)'; };
+    el.onmouseout = () => { el.style.borderColor = 'var(--border)'; el.style.transform = 'none'; };
+    el.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+        <div style="width:36px;height:36px;background:${idea.color}18;border:1px solid ${idea.color}40;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${idea.icon}</div>
+        <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:${idea.color};font-weight:500">${{finanzas:'Adm. y Finanzas',rrhh:'RR.HH.',ventas:'Ventas y Marketing',ops:'Operaciones',cliente:'Atención al cliente'}[idea.cat]}</div>
+      </div>
+      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.3">${idea.name}</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:.6rem"><span style="color:${idea.color}">Problema:</span> ${idea.problem}</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6"><span style="color:var(--aqua)">Solución:</span> ${idea.solution}</div>
+      <div style="margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--border)">
+        <a href="https://wa.me/573192414610?text=Hola%20Daniel%2C%20me%20interesa%20una%20app%20de%20${encodeURIComponent(idea.name)}%20para%20mi%20empresa." target="_blank" style="font-size:11px;color:${idea.color};text-decoration:none;font-weight:500;letter-spacing:.5px">Me interesa esta app →</a>
+      </div>
+    `;
+    grid.appendChild(el);
+    setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 40 * idx);
+  });
+}
+
+renderIdeas();
 </script>
 </body>
 </html>
